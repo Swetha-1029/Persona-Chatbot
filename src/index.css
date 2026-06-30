@@ -1,0 +1,130 @@
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ══════════════════════════════════════════
+   THEMES
+══════════════════════════════════════════ */
+
+/* Default Dark (current) */
+:root, [data-theme="dark"] {
+  --bg:           #0e0e0f;
+  --bg2:          #161618;
+  --bg3:          #1e1e21;
+  --bg4:          #26262b;
+  --border:       #2e2e34;
+  --border2:      #3a3a42;
+  --text:         #e8e8ec;
+  --text2:        #9898a8;
+  --text3:        #5a5a6e;
+  --accent:       #c8a97e;
+  --accent2:      #e4c9a0;
+  --accent-bg:    rgba(200,169,126,0.10);
+  --accent-glow:  rgba(200,169,126,0.18);
+  --user-bubble:  #26262b;
+  --user-border:  #c8a97e;
+  --persona-bubble: #1e1e21;
+  --persona-border: #2e2e34;
+  --chat-bg:      #0e0e0f;
+  --red:          #e06060;
+  --green:        #6ec97a;
+  --font-serif:   'DM Serif Display', Georgia, serif;
+  --font-mono:    'DM Mono', 'Courier New', monospace;
+}
+
+
+/* ── Base Styles ── */
+html, body, #root {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono, 'DM Mono', monospace);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%            { transform: translateY(-6px); opacity: 1; }
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(224,96,96,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(224,96,96,0); }
+}
+@keyframes recPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ── Theme transition ── */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ══════════════════════════════════════════
+   MOBILE RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Sidebar slides over content on mobile */
+  aside {
+    position: fixed !important;
+    top: 0; left: 0;
+    height: 100vh;
+    z-index: 100;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.4);
+  }
+
+  /* Main takes full width */
+  main {
+    width: 100vw !important;
+    min-width: 0 !important;
+  }
+
+  /* Smaller chat bubbles on mobile */
+  .msg-bubble, [class*="userBubble"], [class*="personaBubble"] {
+    max-width: 85vw !important;
+    font-size: 13px !important;
+  }
+
+  /* Input area adjustments */
+  textarea {
+    font-size: 16px !important; /* prevents iOS zoom */
+  }
+
+  /* Modal full screen on mobile */
+  .modal, [class*="modal"] {
+    width: 95vw !important;
+    max-height: 95vh !important;
+    margin: 0 auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Very small screens */
+  [class*="personaName"] {
+    font-size: 15px !important;
+  }
+  [class*="chat-header"], [class*="header"] {
+    padding: 10px 12px !important;
+  }
+}
